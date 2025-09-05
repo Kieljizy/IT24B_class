@@ -11,13 +11,19 @@
     />
     <button onclick="addTask()">Add Task</button>
     <ul id="taskList">Tasks goes here</ul>
+
     <script> 
         function addTask(){
             const taskText = getTaskText();
+            if(taskText){
+                addTaskItem(taskText);
+            } else {
+                console.log("NO TASK ENTERED");
+            }
         }
 
         function getTaskText(){
-            const input = document.getElementById('taskInput');
+            const input = document.getElementById("taskInput");
             const value = input.value.trim();
             console.log("getTaskText() called ->", value);
 
@@ -26,11 +32,11 @@
             }
 
         function addTaskItem(taskText){
-            const li = document.createdElement(li);
-            li.textContent = tasktext;
+            const li = document.createElement("li");
+            li.textContent = taskText;
 
-            document.getElementById('taskList').appendChild(li);
-             console.log("addTaskItem() called ->", Tasktext,Date());
+            document.getElementById("taskList").appendChild(li);
+             console.log("addTaskItem() called ->", taskText,Date());
         }
     </script>
 </body>
