@@ -38,9 +38,9 @@ console.log("Map Loaded" + Date());
 
 fetch(mapDataUrl)
 .then(response => response.json())
-.then(data =>{
+.then(data => {
     data.forEach(pin=>{
-        const marker = L.marker([pin.lat, pin.lang]).addTo(map);
+        const marker = L.marker([pin.lat, pin.lng]).addTo(map);
         marker.bindPopup(`${pin.name})<br>${pin.description}`);
         console.log(`${pin.name}) loaded ` + Date());
     });
@@ -50,14 +50,10 @@ fetch(mapDataUrl)
 
 }
 
-    document.addEventListener('DOMContentLoaded', ()=>{
-        initMap('map');
+    document.addEventListener('DOMContentLoaded',()=>{
+        initMap('maps.json');
     })
  
- 
-    var marker = L.marker([8.3593, 124.8691]).addTo(map);
-    marker.bindPopup("<b>Hello world!</b><br>I am a popup.").openPopup();
-
    
 </script>
 </html>
