@@ -26,12 +26,38 @@
 
 </body>
 <script>
-    var map = L.map('map').setView([8.360453076252297, 124.8686014073985], 17);
+
+ function initMap(mapDataUrl){
+        const map = L.map('map').setView([8.360453076252297, 124.8686014073985], 17);
 
     L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 19,
     attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
 }).addTo(map);
+console.log("Map Loaded" + Date());
 
+fetch(mapDataUrl)
+.then(response => response.json())
+.then(data =>{
+    data.forEach(pin=>{
+        const marker = L.marker([pin.lat, pin.lang]).addTo(map);
+        marker.bindPopup(`${pin.name})<br>${pin.description}`);
+        console.log(`${pin.name}) loaded ` + Date());
+    });
+})
+ 
+    .catch(err=>console.error('Error loading JSON:', err));
+
+}
+
+    document.addEventListener('DOMContentLoaded', ()=>{
+        initMap('map');
+    })
+ 
+ 
+    var marker = L.marker([8.3593, 124.8691]).addTo(map);
+    marker.bindPopup("<b>Hello world!</b><br>I am a popup.").openPopup();
+
+   
 </script>
 </html>
