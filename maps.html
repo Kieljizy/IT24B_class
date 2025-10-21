@@ -17,6 +17,11 @@
         #map { 
             height: 600px; 
         }
+
+        .popup-image{
+            max-width: 200px;
+            height: auto;
+        }
      </style>
 
 </head>
@@ -40,10 +45,19 @@ fetch(mapDataUrl)
 .then(response => response.json())
 .then(data => {
     data.forEach(pin=>{
+
         const marker = L.marker([pin.lat, pin.lng]).addTo(map);
-        marker.bindPopup(`${pin.name})<br>${pin.description}`);
-        console.log(`${pin.name}) loaded ` + Date());
-    });
+        const img = `<img src ='${pin.img}' class="popup-image">`;
+        marker.bindPopup(`
+        ${img})<br>
+        <b>${pin.title}<br>
+            ${pin.description}
+            `);
+            
+
+            console.log(`${pin.name} loaded ` + Date());
+});
+    
 })
  
     .catch(err=>console.error('Error loading JSON:', err));

@@ -1,8 +1,18 @@
 [
     {
      "name":"ICS Laboratory 1",
-     "lat":8.3593,
-     "lng": 124.8691,
-     "description":"This is the ICS Laboratory 1, yipee"
+     "title": "ICS Lab 1",
+     "description":"This is the ICS Laboratory 1, yipee",
+     "img":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSuMvKJ-zPOg9aiRSheu2J-tTbmgHv7hd9VFA&s",
+     "lat": 8.3593,
+     "lng": 124.8691
+    }, 
+    {
+    "name":"School Canteen",
+     "title": "NBSC Canteen",
+     "description":"Mangaon ta mga bai!",
+     "img":"https://gifdb.com/images/high/ishowspeed-meet-up-orangutan-pq8mwxh501c3pzzy.gif",
+     "lat": 8.359400844684163, 
+     "lng": 124.86849897702264
     }
 ]
