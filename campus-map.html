@@ -43,11 +43,47 @@
             attribution:'&copy; OpenStreetMap contribution'
         })
 
+        //Satellite
+        const satellite = L.tileLayer(
+            'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/(z)/(y)/(x)',
+            {attribution: 'Tiles (c) Esri - Source, Maxar, Earthstar Geographics, and GIS User'}
+    );
         openStreetMap.addTo(Map);
-    }
-    document.addEventListener("DOMContentLoaded", ()=>{
+        console.log("Base map tile layer loaded" + Date())
+    
+        const markerGroups = {};
+
+        fetch(mapDataUrl)
+        .then(response => response.json())
+        .then(data=>{
+            data.forEach(pin=>{
+                const type = pint.locationType || "other";
+
+                //Create Marker Group
+                if(!markerGroups[type]){
+                    markerGroups[type] = L.layerGroup();
+                }
+                
+                //marker and  Popup
+
+        const marker = L.marker([pin.lat, pin.lng]).addTo(map);
+        const img = `<img src ='${pin.img}' class="popup-image">`;
+        marker.bindPopup(`
+        ${img})<br>
+        <b>${pin.title}<br>
+            ${pin.description}<br>
+            ${pin.locationType}
+            `);
+
+            console.log(`${pin.name} loaded ` + Date());
+            markerGroups[type].addLayer(marker);
+
+            })
+        })
+
+        document.addEventListener("DOMContentLoaded", ()=>{
         initMap('campus-map.json');
     });
-
+    }
 </script>
 </html>
